@@ -2,15 +2,15 @@ name: Build the plugin
 
 on:
   push:
-    branches: [ "master" ]
+    branches: ["master"]
     paths:
-      - '**.cs'
-      - '**.csproj'
+      - "**.cs"
+      - "**.csproj"
   pull_request:
-    branches: [ "master" ]
+    branches: ["master"]
     paths:
-      - '**.cs'
-      - '**.csproj'
+      - "**.cs"
+      - "**.csproj"
   release:
     types:
       - created
@@ -29,29 +29,29 @@ jobs:
         run: dotnet build
       - name: Create output directory
         run: |
-          mkdir -p output/Retakes_Instadefuse
-          mv ./bin/Debug/net7.0/InstadefusePlugin.dll output/Retakes_Instadefuse/
-          mv ./bin/Debug/net7.0/InstadefusePlugin.pdb output/Retakes_Instadefuse/
-          mv ./lang output/Retakes_Instadefuse/
+          mkdir -p output/RetakesInstadefuse
+          mv ./bin/Debug/net7.0/InstadefusePlugin.dll output/RetakesInstadefuse/
+          mv ./bin/Debug/net7.0/InstadefusePlugin.pdb output/RetakesInstadefuse/
+          mv ./lang output/RetakesInstadefuse/
       - name: Publish artifact
         uses: actions/upload-artifact@v4
         with:
           name: InstadefusePlugin-${{ github.sha }}
           path: output
-  
+
   release:
     needs: build
     permissions: write-all
     runs-on: ubuntu-latest
     if: github.event_name == 'release'
-    
+
     steps:
       - name: Download build artifact
         uses: actions/download-artifact@v4
         with:
           name: InstadefusePlugin-${{ github.sha }}
       - name: Create release asset
-        run: zip -r InstadefusePlugin-${{ github.sha }}.zip ./Retakes_Instadefuse
+        run: zip -r InstadefusePlugin-${{ github.sha }}.zip ./RetakesInstadefuse
       - name: Get release info
         run: |
           RELEASE_INFO=$(curl -sH 'Accept: application/vnd.github.v3+json' https://api.github.com/repos/${{ github.repository }}/releases)
