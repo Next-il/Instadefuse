@@ -20,7 +20,7 @@ public class InstadefusePlugin : BasePlugin
 
 	public static readonly string LogPrefix = $"[Instadefuse {Version}] ";
 	// public static string MessagePrefix = $"[{ChatColors.Green}Retakes{ChatColors.White}] ";
-	private static readonly string MessagePrefix = $" {ChatColors.Lime}➜ {ChatColors.Grey}Next-il {ChatColors.Lime}|{ChatColors.Default} ";
+	private static readonly string MessagePrefix = $" {ChatColors.Lime}➜ {ChatColors.Grey}Next-il {ChatColors.Lime}|{ChatColors.Default} "; // 
 
 
 	private float _bombPlantedTime = float.NaN;
