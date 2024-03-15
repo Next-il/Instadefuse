@@ -29,10 +29,10 @@ jobs:
         run: dotnet build
       - name: Create output directory
         run: |
-          mkdir -p output/InstadefusePlugin
-          mv ./bin/Debug/net7.0/InstadefusePlugin.dll output/InstadefusePlugin/
-          mv ./bin/Debug/net7.0/InstadefusePlugin.pdb output/InstadefusePlugin/
-          mv ./lang output/InstadefusePlugin/
+          mkdir -p output/Retakes_Instadefuse
+          mv ./bin/Debug/net7.0/InstadefusePlugin.dll output/Retakes_Instadefuse/
+          mv ./bin/Debug/net7.0/InstadefusePlugin.pdb output/Retakes_Instadefuse/
+          mv ./lang output/Retakes_Instadefuse/
       - name: Publish artifact
         uses: actions/upload-artifact@v4
         with:
@@ -51,7 +51,7 @@ jobs:
         with:
           name: InstadefusePlugin-${{ github.sha }}
       - name: Create release asset
-        run: zip -r InstadefusePlugin-${{ github.sha }}.zip ./InstadefusePlugin
+        run: zip -r InstadefusePlugin-${{ github.sha }}.zip ./Retakes_Instadefuse
       - name: Get release info
         run: |
           RELEASE_INFO=$(curl -sH 'Accept: application/vnd.github.v3+json' https://api.github.com/repos/${{ github.repository }}/releases)
